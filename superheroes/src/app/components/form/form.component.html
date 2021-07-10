@@ -4,6 +4,18 @@
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <input formControlName="name" />
     <input formControlName="realName" />
-    <button type="submit">Enviar</button>
+    <div formGroupName="habilities">
+      <h2>Habilidades</h2>
+    
+      <label for="street">habilidad 1: </label>
+      <input id="1" type="text" formControlName="1">
+    
+      <label for="city">habilidad 2: </label>
+      <input id="2" type="text" formControlName="2">
+    
+      <label for="state">habilidad 3: </label>
+      <input id="3" type="text" formControlName="3">
+    </div>
+    <button type="submit" [disabled]="!profileForm.valid">Enviar</button>
   </form>
 </div>

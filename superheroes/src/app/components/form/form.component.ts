@@ -13,6 +13,11 @@ export class FormComponent implements OnInit {
   public profileForm = new FormGroup({
     name: new FormControl(''),
     realName: new FormControl(''),
+    habilities: new FormGroup({
+      1: new FormControl(''),
+      2: new FormControl(''),
+      3: new FormControl(''),
+    }),
   });
 
   constructor(private heroesService: HeroesService, private fb: FormBuilder) {}
@@ -30,6 +35,14 @@ export class FormComponent implements OnInit {
       console.log(this.heroes);
       this.profileForm.get('name').setValue(this.heroes[0].nombre);
       this.profileForm.get('realName').setValue(this.heroes[0].nombreReal);
+      //Esto se podria ver como refactorizar y usar un .map
+      this.profileForm.patchValue({
+        habilities: {
+          1: this.heroes[0].habilidades[0],
+          2: this.heroes[0].habilidades[1],
+          3: this.heroes[0].habilidades[2],
+        },
+      });
     });
   }
 
