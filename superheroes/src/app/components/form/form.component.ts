@@ -10,16 +10,16 @@ import { HeroesService } from 'src/app/services/heroes.services';
 export class FormComponent implements OnInit {
   public heroes: any;
   public myForm: FormGroup;
+  public profileForm = new FormGroup({
+    name: new FormControl(''),
+    realName: new FormControl(''),
+  });
 
   constructor(private heroesService: HeroesService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.setForm();
     this.getAllHeroes();
-    this.myForm = this.fb.group({
-      email: new FormControl(''),
-      password: new FormControl(''),
-    });
   }
 
   public setForm(): void {}
@@ -28,11 +28,13 @@ export class FormComponent implements OnInit {
     this.heroesService.getHeroes().subscribe((res) => {
       this.heroes = res.data;
       console.log(this.heroes);
-      this.myForm.get('email').setValue(this.heroes[0].nombre);
+      this.profileForm.get('name').setValue(this.heroes[0].nombre);
+      this.profileForm.get('realName').setValue(this.heroes[0].nombreReal);
     });
   }
 
-  public doSomething = () => {
-    console.log('HOla');
-  };
+  public onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
+  }
 }
