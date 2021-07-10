@@ -1,0 +1,61 @@
+<div class="content">
+  <app-header></app-header>
+  
+  <form class="hero__filter"
+    (submit)="searchHeroe(checkboxValue, numberId)"
+  >
+    <div class="hability__filter">
+      <input type="checkbox" [(ngModel)]="checkboxValue"
+      [ngModelOptions]="{standalone: true}">
+      <div class="hability__text"> ¿ Puede volar ?</div>
+    </div>
+    <div class="input-group">
+      <input type="number" class="form-control" placeholder="Filtrar heroe por ID"
+        min="1" max="5" [(ngModel)]="numberId"
+        [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-outline-secondary" type="submit" 
+        id="button-addon2">Buscar
+      </button>
+    </div>
+    
+    <div class="filter__alert" *ngIf="errorAlert">
+      ** Sólo puede ser un número entre 1 y 5 **
+    </div>
+  </form>
+  
+  <div class="heroes__filter">
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Nombre del héroe</span>
+      </div>
+      <input type="text" name="filterHeroe" class="form-control" 
+        [(ngModel)]="filterHeroes"
+      >
+    </div>    
+  </div>
+
+  <div class="superheroes_list" *ngIf="showList">
+    <div class="superheroes__list_title">
+      <div class="list_title_txt">
+        SuperHéroes
+      </div>
+    </div>
+    <div class="superhero__cards" *ngFor="let heroe of supArray | filter: filterHeroes">
+      <div class="superheroe_img">
+        <img class="heroe_avatar" src="{{ heroe.avatarURL ? heroe.avatarURL : '' }}" 
+          onerror="this.src='../../assets/noimage.jpg';"
+        >
+      </div>
+      <div class="superheroes_info">
+        <div class="superheroes__name">
+          {{ heroe ? heroe.nombre : 'No definido' }}
+        </div>
+        <div class="superheroes__real__name">
+          {{ heroe ? heroe.nombreReal: 'No definido' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

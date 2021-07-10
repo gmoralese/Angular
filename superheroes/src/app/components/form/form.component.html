@@ -1,0 +1,9 @@
+<div>
+  Este es un formulario
+  <br>
+  <form [formGroup]="myForm" (onSubmit)="doSomething()">
+    <input formControlName="email" />
+    <input type="password" formControlName="password" />
+    <button type="submit">Registrarme</button>
+  </form>
+</div>
